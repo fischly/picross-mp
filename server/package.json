@@ -1,0 +1,14 @@
+{
+  "name": "picross-mp-server",
+  "version": "0.0.1",
+  "description": "The server component for the game Picross-MP.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felix Mitterer",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^7.4.6"
+  }
+}
