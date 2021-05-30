@@ -1,5 +1,5 @@
 
-export function handleActionPerformedMessage(message) {
+exports.handleActionPerformedMessage = function(message) {
     let userId = message.userId;
     let fieldState = message.fieldState;
 

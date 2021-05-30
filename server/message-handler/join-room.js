@@ -1,5 +1,5 @@
 
-export function handleJoinRoomMessage(message) {
+exports.handleJoinRoomMessage = function(message) {
     let userId = message.userId;
     let roomId = message.roomId;
 

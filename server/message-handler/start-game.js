@@ -1,5 +1,5 @@
 
-export function handleStartGameMessage(message) {
+exports.handleStartGameMessage =  function(message) {
     let userId = message.userId;
     let roomId = message.roomId; // needed?
 

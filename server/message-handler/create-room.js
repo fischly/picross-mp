@@ -1,5 +1,5 @@
 
-export function handleCreateRoomMessage(message) {
+exports.handleCreateRoomMessage = function(message) {
     let userId = message.userId;
     let seed = (message.seed === undefined) ? Date.now() : message.seed;
 
