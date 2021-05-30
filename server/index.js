@@ -3,6 +3,13 @@ const WebSocket = require('ws');
 const url = require('url');
 const fs = require('fs');
 
+// import all the message handlers
+const handleActionPerformedMessage = require('./message-handler/action-performed').handleActionPerformedMessage;
+const handleCreateRoomMessage = require('./message-handler/create-room').handleCreateRoomMessage;
+const handleJoinRoomMessage = require('./message-handler/join-room').handleJoinRoomMessage;
+const handleRegisterUserMessage = require('./message-handler/register-user').handleRegisterUserMessage;
+const handleStartGameMessage = require('./message-handler/start-game').handleStartGameMessage;
+
 // create the HTTP server that is used to serve the index.html as well as for connecting to the websocket server
 const server = http.createServer();
 
@@ -14,11 +21,15 @@ wss.on('connection', function connection(ws) {
     console.log('on connection: ');
     // handling websocket messages
     ws.on('message', function incoming(message) {
-        let jsonMessage = JSON.parse(message);
+        const jsonMessage = JSON.parse(message);
         console.log('JSON message: ', jsonMessage);
 
         switch (jsonMessage.type) {
-           /* TODO: handle different chat messages */
+           case 'CreateRoom': handleCreateRoomMessage(jsonMessage); break;
+           case 'StartGame': handleStartGameMessage(jsonMessage); break;
+           case 'RegisterUser': handleRegisterUserMessage(jsonMessage, ws); break;
+           case 'JoinRoom': handleJoinRoomMessage(jsonMessage); break;
+           case 'ActionPerformed': handleActionPerformedMessage(jsonMessage); break;
         }
 
         console.log('received: ', message);
