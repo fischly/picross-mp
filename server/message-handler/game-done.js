@@ -2,12 +2,15 @@
 const roomHandler = require('../data-handler/game-rooms');
 const userHandler = require('../data-handler/users');
 
-exports.handleActionPerformedMessage = function(message) {
+const logging = require('../util/logging');
+
+exports.handleGameDoneMessage = function(message) {
     const userId = message.userId;
     const roomId = message.roomId;
-    const fieldState = message.fieldState;
+    const time = message.time;
+    const mistakes = message.mistakes;
 
-    console.log(`[ActionPerformed] got ActionPerforme message (userId = ${userId}, fieldState = ${fieldState})`);
+    console.log(`[GameDone] got GameDone message (userId = ${userId}, roomId = ${roomId}, time = ${time}, mistakes = ${mistakes})`);
 
      // test if this room exists
      if (roomHandler.gameRooms[roomId] === undefined) {
@@ -19,11 +22,13 @@ exports.handleActionPerformedMessage = function(message) {
 
     const room = roomHandler.gameRooms[roomId];
     
-    const actionPerformedMessage = { type: 'ActionPerformed', userId: userId, fieldState: fieldState };
+    const playerDoneMessage = { type: 'PlayerDone', userId: userId, time: time, mistakes: mistakes };
     for (let user of room.users) {
         if (user != userId) { 
-            console.log('[ActionPerformed] sending ActionPerformed message (', actionPerformedMessage, ') to user from userlist: ', user);
-            userHandler.userList[user].send(JSON.stringify(actionPerformedMessage));
+            console.log('[PlayerDone] sending PlayerDone message (', playerDoneMessage, ') to user from userlist: ', user);
+            userHandler.userList[user].send(JSON.stringify(playerDoneMessage));
         }
     }
+
+    logging.log_win(userId, time, mistakes);
 }

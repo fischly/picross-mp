@@ -26,7 +26,7 @@ exports.handleStartGameMessage =  function(message) {
 
     room.started = true;
 
-    const gameStartedMessage = { type: 'GameStarted', roomId: roomId, seed: room.seed, others: room.users };
+    const gameStartedMessage = { type: 'GameStarted', roomId: roomId, seed: room.seed, others: room.users, fieldSize: room.fieldSize };
 
     // send a GameStarted message to everyone in the room
     for (let user of room.users) {

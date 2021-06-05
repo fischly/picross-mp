@@ -9,6 +9,9 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: '*' }});
 
+const userHandler = require('./data-handler/users');
+const roomHandler = require('./data-handler/game-rooms');
+
 // serve the index.html file on the / route http server
 app.get('/', (req, resp) => {
     resp.sendFile(__dirname + '/index.html');
@@ -20,6 +23,7 @@ const handleCreateRoomMessage = require('./message-handler/create-room').handleC
 const handleJoinRoomMessage = require('./message-handler/join-room').handleJoinRoomMessage;
 const handleRegisterUserMessage = require('./message-handler/register-user').handleRegisterUserMessage;
 const handleStartGameMessage = require('./message-handler/start-game').handleStartGameMessage;
+const handleGameDoneMessage =  require('./message-handler/game-done').handleGameDoneMessage;
 
 // handle incoming socket.io connections
 io.on('connection', function(ws) {
@@ -35,6 +39,7 @@ io.on('connection', function(ws) {
             case 'RegisterUser': handleRegisterUserMessage(jsonMessage, ws); break;
             case 'JoinRoom': handleJoinRoomMessage(jsonMessage); break;
             case 'ActionPerformed': handleActionPerformedMessage(jsonMessage); break;
+            case 'GameDone': handleGameDoneMessage(jsonMessage); break;
          }
  
          console.log('received: ', message);
@@ -42,6 +47,12 @@ io.on('connection', function(ws) {
 
     ws.on('disconnect', function(code, reason) {
         console.log('client disconnected, code = ', code, ', reason = ', reason);
+        
+        // // remove user from userList
+        // const removedUserId = userHandler.findUserBySocket(ws);
+        // delete userHandler.userList[removedUserId];
+
+        // // remove user from all rooms
     });
 });
 
