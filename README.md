@@ -1,19 +1,22 @@
 <!-- PROJECT LOGO -->
 <br />
-<p>
+<p align="center">
   <a href="https://github.com/fischly/picross-mp">
     <img src="images/logo.png" alt="Logo" width="370" height="200">
   </a>
 
-  <h3>Picross MP</h3>
+  <h3 align="center">Picross MP</h3>
 
-  <p>
+  <p align="center">
     Picross MP is a multiplayer version of the lovely game Picross. 
     <br />
+    A (not always up-to date) web-version of the project to test it yourself is available here:
+    <br />
+    <a href="http://fischly.freemyip.com:7777">View Demo</a>
     <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    
     ·
     <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
     ·
