@@ -100,6 +100,10 @@ function onTableMouseUp(event) {
                 const messageToSend = { type: 'GameDone', userId: localUsername, roomId: currentRoomId, time: currentGameStopTime - currentGameStartTime, mistakes: currentMistakes };
                 console.log('[GameDone] Sending GameDone message: ', messageToSend);
                 socket.send(JSON.stringify(messageToSend));
+
+                // show the alert
+                $('#game-status-alert-own-text').text(`Yay! You finished in ${((currentGameStopTime - currentGameStartTime) / 1000) | 0} seconds and only made ${currentMistakes} mistakes! I am proud.`);
+                $('#game-status-alert-own').fadeIn();
             }
         }
     }
