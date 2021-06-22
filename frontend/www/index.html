@@ -25,6 +25,16 @@
         <img src="img/logo.png" class="mt-2" width="80%" />
         <form class="">
             <div class="form-group" style="width: 300px; margin: auto; margin-bottom: 15px;">
+                <select id="room-size-select" class="form-select">
+                    <option value="" selected>Select field size</option>
+                    <option value="5x5">5x5</option>
+                    <option value="10x5">10x5</option>
+                    <option value="10x10">10x10</option>
+                    <option value="15x10">15x10</option>
+                    <option value="15x15">15x15</option>
+                    <option value="20x15">20x15</option>
+                    <option value="20x20">20x20</option>
+                  </select>
                 <button type="button" id="btn-create-room" class="btn btn-light disabled" style="width: 100%;">Create room</button>
             </div>
 
@@ -50,6 +60,10 @@
                 <input type="text" class="form-control" id="room-seed" readonly>
             </div>
             <div class="form-group mt-3">
+                <label for="room-size">Room size</label>
+                <input type="text" class="form-control" id="room-size" readonly>
+            </div>
+            <div class="form-group mt-3">
                 <label for="room-others">Others in this room</label>
                 <textarea class="form-control" id="room-others" readonly></textarea>
             </div>
@@ -59,19 +73,23 @@
     </div>
     <div class="app d-none" oncontextmenu="return false;">
         <div id="app-container">
-            <div id="game-status-div">
-                <span class="game-status-timer">Time: <span id="game-status-timer-value">8:10</span>s</span>
-                <span class="game-status-mistakes">Mistakes: <span id="game-status-mistakes-value">0</span></span>
-            </div> <!-- #game-status-div -->
+            <div>
+                <div id="game-table-container">
+                    <div id="game-status-div">
+                        <span class="game-status-timer">Time: <span id="game-status-timer-value">4:20</span>s</span>
+                        <span class="game-status-mistakes">Mistakes: <span id="game-status-mistakes-value">0</span></span>
+                    </div> <!-- #game-status-div -->
+                    <table>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div> <!-- .game-table-container -->
+            </div>
 
-            <div id="game-table-container">
-                <table>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div> <!-- .game-table-container -->
-
-            <div class="alert alert-success" id="game-status-alert" role="alert">
+            <div class="alert alert-success" id="game-status-alert-own">
+                Test kek
+            </div>
+            <div class="alert alert-success" id="game-status-alert-other" role="alert">
                 Other player finished in 1:40min and with 4 errors.
             </div>
         </div>

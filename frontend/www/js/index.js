@@ -136,7 +136,16 @@ function onSocketMessage(event) {
 /* ------- BUTTON INPUT -------- */
 /* ----------------------------- */
 function onRoomCreateButtonClick(event) {
-    const messageToSend = { type: 'CreateRoom', userId: localUsername };
+    let fieldSize;
+
+    if (document.querySelector('#room-size-select').selectedIndex == 0) {
+        fieldSize = { width: 10, height: 10 };
+    } else {
+        const fieldSizeValues = $('#room-size-select').val().split('x').map(val => Number.parseInt(val));
+        fieldSize = { width: fieldSizeValues[0], height: fieldSizeValues[1] };
+    }
+
+    const messageToSend = { type: 'CreateRoom', userId: localUsername, fieldSize: fieldSize };
 
     console.info('Sending a CreateRoom message: ', messageToSend);
     socket.send(JSON.stringify(messageToSend));
@@ -181,15 +190,17 @@ function onTouchEnd(event) {
 /* ----- MESSAGE HANDLING ------ */
 /* ----------------------------- */
 function handleRoomJoinedMessage(message) {
-    let userId = message.userId;
-    let roomId = message.roomId;
-    let seed = message.seed;
-    let others = message.others;
+    const userId = message.userId;
+    const roomId = message.roomId;
+    const seed = message.seed;
+    const fieldSize = message.fieldSize;
+    const others = message.others;
 
     if (userId === localUsername) {
         $('#room-username').val(userId);
         $('#room-roomid').val(roomId);
         $('#room-seed').val(seed);
+        $('#room-size').val(`${fieldSize.width}x${fieldSize.height}`);
         $('#room-others').val(others.join('\n'));
 
         $('.screen-title').addClass('d-none');
@@ -217,6 +228,8 @@ function handleGameStartedMessage(message) {
     currentField = seed2field(seed, fieldSize);
     renderField(fieldTable, currentField.field, currentField.hintsX, currentField.hintsY, fieldSize);
     currentFieldSize = fieldSize;
+
+    // update the game div according to the 
     
     // create the actions array
     currentActions = [];
@@ -262,8 +275,8 @@ function handlePlayerDoneMessage(message) {
     const time = message.time;
     const mistakes = message.mistakes;
 
-    $('#game-status-alert').text(`Other player finished in ${((time / 1000) | 0)}s and with ${mistakes} errors.`);
-    $('#game-status-alert').fadeIn();
+    $('#game-status-alert-other').text(`Other player finished in ${((time / 1000) | 0)}s and with ${mistakes} errors.`);
+    $('#game-status-alert-other').fadeIn();
 }
 
 /* for local debugging: TODO REMOVE!!! */

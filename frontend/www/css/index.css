@@ -25,11 +25,12 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+#game-table-container {
+    width: max-content;
+    margin: auto;
+}
 
-#game-table-container,
 #game-status-div {
-    width: 600px;
-
     margin: auto;
 }
 
@@ -159,7 +160,8 @@ table {
 }
 
 
-#game-status-alert {
+#game-status-alert-own,
+#game-status-alert-other {
     text-align: center;
 
     display: none;

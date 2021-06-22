@@ -56,8 +56,6 @@ function onTableMouseUp(event) {
 
     if (tableIsMouseDown) {
         if (event.target.dataset.x !== undefined && event.target.dataset.y !== undefined) {
-            console.log('hi');
-
             const cellX = Number.parseInt(event.target.dataset.x);
             const cellY = Number.parseInt(event.target.dataset.y);
             
