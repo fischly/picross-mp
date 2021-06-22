@@ -26,11 +26,11 @@
 }
 
 #connection-status-changeable.success {
-    color: darkgreen;
+    color: #9af39a;
 }
 #connection-status-changeable.loading {
     color: #aaa;
 }
 #connection-status-changeable.error {
-    color: red;
+    color: rgb(255, 116, 116);
 }
