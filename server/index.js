@@ -12,11 +12,6 @@ const io = new Server(server, { cors: { origin: '*' }});
 const userHandler = require('./data-handler/users');
 const roomHandler = require('./data-handler/game-rooms');
 
-// serve the index.html file on the / route http server
-app.get('/', (req, resp) => {
-    resp.sendFile(__dirname + '/index.html');
-});
-
 // import all the message handlers
 const handleActionPerformedMessage = require('./message-handler/action-performed').handleActionPerformedMessage;
 const handleCreateRoomMessage = require('./message-handler/create-room').handleCreateRoomMessage;
@@ -55,6 +50,15 @@ io.on('connection', function(ws) {
         // // remove user from all rooms
     });
 });
+
+
+app.use(function(req, res, next) {
+    if (req.path === '/') {
+        return res.redirect('index.html');
+    }
+    next();
+});
+app.use(express.static('../frontend/www/'));
 
 // start the server on port 8080
 server.listen(8080, function() {

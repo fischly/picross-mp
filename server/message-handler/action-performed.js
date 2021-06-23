@@ -7,7 +7,7 @@ exports.handleActionPerformedMessage = function(message) {
     const roomId = message.roomId;
     const fieldState = message.fieldState;
 
-    console.log(`[ActionPerformed] got ActionPerforme message (userId = ${userId}, fieldState = ${fieldState})`);
+    console.log(`[ActionPerformed] got ActionPerforme message (userId = ${userId}, fieldState = [...])`);
 
      // test if this room exists
      if (roomHandler.gameRooms[roomId] === undefined) {
@@ -22,7 +22,7 @@ exports.handleActionPerformedMessage = function(message) {
     const actionPerformedMessage = { type: 'ActionPerformed', userId: userId, fieldState: fieldState };
     for (let user of room.users) {
         if (user != userId) { 
-            console.log('[ActionPerformed] sending ActionPerformed message (', actionPerformedMessage, ') to user from userlist: ', user);
+            console.log('[ActionPerformed] sending ActionPerformed message to user from userlist: ', user);
             userHandler.userList[user].send(JSON.stringify(actionPerformedMessage));
         }
     }

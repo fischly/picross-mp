@@ -24,6 +24,12 @@ exports.handleJoinRoomMessage = function(message) {
         return;
     }
 
+    if (room.users.length >= 2) {
+        userHandler.userList[userId].send(JSON.stringify({ type: 'error', text: 'this room is full'}));
+        console.info('[JoinRoom] a user tried to join room ' + roomId + ', but this room was already full.');
+        return;
+    }
+
     // update the room
     room.users.push(userId);
 

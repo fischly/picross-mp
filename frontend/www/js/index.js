@@ -23,8 +23,7 @@ document.addEventListener('deviceready', onDeviceReady, false);
 /* ------ INITIALIZATION ------- */
 /* ----------------------------- */
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
-    // console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+    // cordova is now initialized
 
     // get local username
     if (localStorage.username === undefined) {
@@ -72,32 +71,6 @@ function onDeviceReady() {
 
     gameStatusMistakeSpan = document.querySelector('#game-status-mistakes-value');
     gameStatusTimeSpan = document.querySelector('#game-status-timer-value');
-
-    /* DEBUGGING LOADING A FIELD */
-    /*
-    // generate field and render it as table
-    const fieldSize = {width: 10, height: 10};
-    currentField = seed2field(Math.random(), fieldSize);
-    renderField(fieldTable, currentField.field, currentField.hintsX, currentField.hintsY, fieldSize);
-    currentFieldSize = fieldSize;
-
-    // $(fieldTable.parentElement).tooltip('show');
-    console.log($().tooltip);
-     // create the actions array
-    currentActions = [];
-    for (let y = 0; y < currentFieldSize.height; y++) {
-        currentActions[y] = [];
-        for (let x = 0; x < currentFieldSize.width; x++) {
-            currentActions[y][x] = 0;
-        }
-    }*/
-    /* DEBUGGING LOADING A FIELD END */
-
-
-    // Array.from({length: 25}, () => Math.floor(Math.random() * 50)).forEach(i => $('.cell').get(i).classList.add('opened'));
-    // Array.from({length: 25}, () => Math.floor(Math.random() * 50)).forEach(i => $('.cell').get(i).classList.add('mistake'))
-    // Array.from({length: 25}, () => Math.floor(Math.random() * 50)).forEach(i => $('.cell').get(i).classList.add('mistakeother'))
-    // Array.from({length: 25}, () => Math.floor(Math.random() * 50)).forEach(i => $('.cell').get(i).classList.add('correctother'))
 }
 
 /* ----------------------------- */
@@ -141,6 +114,7 @@ function onSocketMessage(event) {
         case 'GameStarted': handleGameStartedMessage(message); break;
         case 'ActionPerformed': handleActionPerformedMessage(message); break;
         case 'PlayerDone': handlePlayerDoneMessage(message); break;
+        case 'error': alert('Error: ' + message.text); break;
         default: console.log('GOT UNHANDELED MESSAGE: ', message); break;
     }
 }
@@ -257,14 +231,6 @@ function handleGameStartedMessage(message) {
         }
     };
     window.setTimeout(timerFunc, 1000);
-
-    // let intervalId = window.setInterval(() => {
-    //     gameStatusTimeSpan.innerText = (((Date.now() - currentGameStartTime) / 1000) | 0);
-
-    //     if (currentGameFinished) {
-    //         window.clearInterval(intervalId);
-    //     }
-    // }, 1000);
 }
 
 function handleActionPerformedMessage(message) {
@@ -285,5 +251,5 @@ function handlePlayerDoneMessage(message) {
 }
 
 /* for local debugging: TODO REMOVE!!! */
-// var cordova = { platformId: 'browser' };
-// onDeviceReady();
+var cordova = { platformId: 'browser' };
+onDeviceReady();
