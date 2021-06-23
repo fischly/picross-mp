@@ -61,6 +61,12 @@ app.use(function(req, res, next) {
 app.use(express.static('../frontend/www/'));
 
 // start the server on port 8080
-server.listen(8080, function() {
-    console.log(`Server running on port 8080`);
+const port = Number.parseInt(process.argv[2]);
+if (!port) {
+    console.error('could not parse given port, aborting...');
+    return;
+}
+
+server.listen(port, function() {
+    console.log(`Server running on port ${port}`);
 });

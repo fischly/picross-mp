@@ -36,8 +36,10 @@ function onDeviceReady() {
 
     // try to connect to websocket server
     // socket = new WebSocket('ws://fischly.freemyip.com:7777/ws');
-    socket = io.connect('ws://fischly.freemyip.com:7778');
+    // socket = io.connect('ws://fischly.freemyip.com:7778');
     // socket = io('ws://localhost:8080');
+    socket = io('ws://' + location.host);
+    
 
     socket.on('connect', onSocketOpen);
     socket.on('disconnect', onSocketClose);
