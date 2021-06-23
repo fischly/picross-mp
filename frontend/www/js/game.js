@@ -10,8 +10,6 @@ function onTableMouseMove(event) {
     if (tableIsMouseDown) {
         // ...and if the mousemove event happened on a game cell
         if (event.target.dataset.x !== undefined && event.target.dataset.y !== undefined) {
-            console.log('yeah');
-
             // add hovered class to all cells inbetween
             const cellX = Number.parseInt(event.target.dataset.x);
             const cellY = Number.parseInt(event.target.dataset.y);
@@ -60,7 +58,7 @@ function onTableMouseUp(event) {
         if (event.target.dataset.x !== undefined && event.target.dataset.y !== undefined) {
             const cellX = Number.parseInt(event.target.dataset.x);
             const cellY = Number.parseInt(event.target.dataset.y);
-            
+
             // mouseDown cell == mouseUp cell, open the cell
             if (cellX == tableMouseDownStart.x && cellY == tableMouseDownStart.y) {
                 openCell(cellX, cellY, event.which === 1);
@@ -68,14 +66,14 @@ function onTableMouseUp(event) {
                 if (cellX != tableMouseDownStart.x) {
                     const hoverStart = Math.min(cellX, tableMouseDownStart.x);
                     const hoverEnd = Math.max(cellX, tableMouseDownStart.x);
-    
+
                     for (let hoverCellX = hoverStart; hoverCellX <= hoverEnd; hoverCellX++) {
                         openCell(hoverCellX, tableMouseDownStart.y, event.which === 1);
                     }
                 } else if (cellY != tableMouseDownStart.y) {
                     const hoverStart = Math.min(cellY, tableMouseDownStart.y);
                     const hoverEnd = Math.max(cellY, tableMouseDownStart.y);
-    
+
                     for (let hoverCellY = hoverStart; hoverCellY <= hoverEnd; hoverCellY++) {
                         openCell(tableMouseDownStart.x, hoverCellY, event.which === 1);
                     }
@@ -120,39 +118,64 @@ function onTableMouseUp(event) {
 const modeButton = document.querySelector('#mode-switch-button');
 
 var touchOpenMode = true;
-var touchDownStart = null;
 var isTouchDown = false;
-
-var touchDownOnButton1 = false;
-var touchDownOnButton1Identifier = -1;
+var isMultiTouch = false;
 
 function onTouchStart(event) {
-    let myev = { target: event.target, which: touchOpenMode ? 1 : 3 };
-    onTableMouseDown(myev);   
+    console.log('[TOUCHSTART]', event);
+
+    // if touch was not already down
+    if (!isTouchDown) {
+        let myev = { target: event.target, which: touchOpenMode ? 1 : 3 };
+        onTableMouseDown(myev);
+
+        isTouchDown = true;
+    } else {
+        isTouchDown = false;
+        tableIsMouseDown = false;
+
+        isMultiTouch = true;
+    }
+
 }
 
 function onTouchEnd(event) {
-    const realTarget = document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-    onTableMouseUp({ target: realTarget, which: touchOpenMode ? 1 : 3 });
+    console.log('[TOUCHEND]', event);
+
+    if (isTouchDown) {
+        const realTarget = document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+        onTableMouseUp({ target: realTarget, which: touchOpenMode ? 1 : 3 });
+
+        isTouchDown = false;
+    }
+    
+    isMultiTouch = false;
 }
 
 function onTouchMove(event) {
-    const realTarget = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
-    onTableMouseMove({ target: realTarget, which: touchOpenMode ? 1 : 3 });
+    if (event.changedTouches.length == 1) {
+        const realTarget = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
+        onTableMouseMove({ target: realTarget, which: touchOpenMode ? 1 : 3 });
+    }
+
+    if (!isMultiTouch) {
+        event.preventDefault();
+        return false;
+    }
 }
 
 function updateModeButtonPosition() {
-    const lowerleft = [window.pageXOffset,(window.pageYOffset+window.innerHeight)];
-	const lowerright = [(lowerleft[0] + window.innerWidth),lowerleft[1]];
-    const zoomFactor = window.innerWidth/document.documentElement.clientWidth;
-    
+    const lowerleft = [window.pageXOffset, (window.pageYOffset + window.innerHeight)];
+    const lowerright = [(lowerleft[0] + window.innerWidth), lowerleft[1]];
+    const zoomFactor = window.innerWidth / document.documentElement.clientWidth;
+
     // console.log('lowerLeft = ', lowerleft, 'lower right: ', lowerright, 'zoom factor: ', zoomFactor)
 
-	modeButton.style.width = (80 * zoomFactor) + 'px';
-	modeButton.style.height = modeButton.style.width;
-	modeButton.style.left = (lowerleft[0] + (25 * zoomFactor)) + 'px';
-	modeButton.style.top = (lowerleft[1] - modeButton.offsetHeight - (25 * zoomFactor)) + 'px';
-	// // el.style.fontSize = parseInt(zoomFactor*60) + 'px';
+    modeButton.style.width = (80 * zoomFactor) + 'px';
+    modeButton.style.height = modeButton.style.width;
+    modeButton.style.left = (lowerleft[0] + (25 * zoomFactor)) + 'px';
+    modeButton.style.top = (lowerleft[1] - modeButton.offsetHeight - (25 * zoomFactor)) + 'px';
+    // // el.style.fontSize = parseInt(zoomFactor*60) + 'px';
 }
 
 function switchModeButtonClicked(event) {
@@ -234,5 +257,5 @@ function isFieldDone() {
 }
 
 function getMistakeCount() {
-    return currentActions.flat().reduce((a,b) => { return (b == -1) ? a+1 : a }, 0);
+    return currentActions.flat().reduce((a, b) => { return (b == -1) ? a + 1 : a }, 0);
 }

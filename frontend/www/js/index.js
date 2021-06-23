@@ -52,14 +52,13 @@ function onDeviceReady() {
     $('#room-btn-start').click(onRoomStartButtonClick);
 
     // add listeners to the tbody
-    // TODO: remove for produciton and use cordova.plattformId (!!!)
-    if (cordova.platformId == 'android') {
+    if (cordova.platformId == 'android' || mobileCheck()) {
         $('.app table tbody')[0].addEventListener('touchstart', onTouchStart);
         $('.app table tbody')[0].addEventListener('touchend', onTouchEnd);
         $('.app table tbody')[0].addEventListener('touchmove', onTouchMove);
 
         // touchmove event handler that repositions the switch-mode buttons (dirty fix since there seems no other way to statically place a button)
-        // window.addEventListener('touchmove', updateModeButtonPosition);
+        window.addEventListener('touchmove', updateModeButtonPosition);
 
         // click handler for the switch-mode button
         $('#mode-switch-button').click(switchModeButtonClicked);
@@ -241,7 +240,7 @@ function handleGameStartedMessage(message) {
     }
     
     // if we are on android, display the mark button
-    if (cordova.platformId == 'android') {
+    if (cordova.platformId == 'android' || mobileCheck()) {
         $('#mode-switch-button').show();
         updateModeButtonPosition();
     }
