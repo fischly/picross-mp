@@ -73,10 +73,14 @@
       - Both players play on the same field - the first one to open a field correctly gets points (this could be problematic due to ping differences).
       - A player can play a (custom) seed and the time it took to solve gets recorded. He then can challenge others to beat his time by sending an invite, for example. 
   
-  For the multiplayer aspect (data synchronization), I want to use Google's [Firebase Realtime Database](https://firebase.google.com/docs/database). It sounds really interesting and has generous [free quotas](https://firebase.google.com/docs/firestore/quotas).
-  >Store and sync data with our NoSQL cloud database. Data is synced across all clients in realtime, and remains available when your app goes offline.
-  >
-  > -- [Firebase Realtime Database Docs](https://firebase.google.com/docs/database)
+  ### Backend
+  For the multiplayer aspect (data synchronization), I implement a node.js server, that communicates with the clients via the WebSocket based library [socket.io](https://socket.io/).
+  > Socket.IO enables real-time, bidirectional and event-based communication.
+  > It works on every platform, browser or device, focusing equally on reliability and speed.
+  
+  I then designed a little protocol, that is state-based and request-response focused. Here is an overview of the different message types and their answers in form of a sequence diagram:
+  <br>
+  <img src="images/picross-mp-sequence.svg" alt="Logo" width="800">
   
   ## Getting Started
   In progress...
