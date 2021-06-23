@@ -158,13 +158,13 @@ function updateModeButtonPosition() {
 function switchModeButtonClicked(event) {
     if (this.dataset.mode == 'filled') {
         this.dataset.mode = 'empty';
-        this.style.backgroundColor = '#aaa';
+        this.style.backgroundColor = 'rgba(170, 170, 170, 0.5)';
 
         touchOpenMode = false;
 
     } else {
         this.dataset.mode = 'filled';
-        this.style.backgroundColor = '#1b96fa';
+        this.style.backgroundColor = 'rgba(25, 149, 250, 0.5)';
 
 
         touchOpenMode = true;

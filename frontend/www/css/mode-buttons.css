@@ -1,8 +1,8 @@
 #mode-switch-button {
     position: absolute;
 
-    background-color: #1b96fa;
-
+    background-color: rgba(25, 149, 250, 0.5);
+    
     width: 7em;
     height: 7em;
 
