@@ -11,3 +11,6 @@ node_modules/
 # some local scripts for deployment
 www/server_update.sh
 www/upload_www_zip.bat
+
+# some unfinished stuff
+www/js/fireworks/
