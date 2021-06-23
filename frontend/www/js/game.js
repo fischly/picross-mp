@@ -10,6 +10,8 @@ function onTableMouseMove(event) {
     if (tableIsMouseDown) {
         // ...and if the mousemove event happened on a game cell
         if (event.target.dataset.x !== undefined && event.target.dataset.y !== undefined) {
+            console.log('yeah');
+
             // add hovered class to all cells inbetween
             const cellX = Number.parseInt(event.target.dataset.x);
             const cellY = Number.parseInt(event.target.dataset.y);
@@ -102,7 +104,7 @@ function onTableMouseUp(event) {
                 socket.send(JSON.stringify(messageToSend));
 
                 // show the alert
-                $('#game-status-alert-own-text').text(`Yay! You finished in ${((currentGameStopTime - currentGameStartTime) / 1000) | 0} seconds and only made ${currentMistakes} mistakes! I am proud.`);
+                $('#game-status-alert-own-text').text(`Yay! You finished in ${((currentGameStopTime - currentGameStartTime) / 1000) | 0} seconds and only made ${currentMistakes} mistakes! I am proud of you.`);
                 $('#game-status-alert-own').fadeIn();
             }
         }
@@ -112,6 +114,63 @@ function onTableMouseUp(event) {
     $('.cell.hovered').removeClass('hovered');
     tableIsMouseDown = false;
 }
+/* -------------------------- */
+/* --- TABLE TOUCH EVENTS --- */
+/* -------------------------- */
+const modeButton = document.querySelector('#mode-switch-button');
+
+var touchOpenMode = true;
+var touchDownStart = null;
+var isTouchDown = false;
+
+var touchDownOnButton1 = false;
+var touchDownOnButton1Identifier = -1;
+
+function onTouchStart(event) {
+    let myev = { target: event.target, which: touchOpenMode ? 1 : 3 };
+    onTableMouseDown(myev);   
+}
+
+function onTouchEnd(event) {
+    const realTarget = document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+    onTableMouseUp({ target: realTarget, which: touchOpenMode ? 1 : 3 });
+}
+
+function onTouchMove(event) {
+    const realTarget = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
+    onTableMouseMove({ target: realTarget, which: touchOpenMode ? 1 : 3 });
+}
+
+function updateModeButtonPosition() {
+    const lowerleft = [window.pageXOffset,(window.pageYOffset+window.innerHeight)];
+	const lowerright = [(lowerleft[0] + window.innerWidth),lowerleft[1]];
+    const zoomFactor = window.innerWidth/document.documentElement.clientWidth;
+    
+    // console.log('lowerLeft = ', lowerleft, 'lower right: ', lowerright, 'zoom factor: ', zoomFactor)
+
+	modeButton.style.width = (80 * zoomFactor) + 'px';
+	modeButton.style.height = modeButton.style.width;
+	modeButton.style.left = (lowerleft[0] + (25 * zoomFactor)) + 'px';
+	modeButton.style.top = (lowerleft[1] - modeButton.offsetHeight - (25 * zoomFactor)) + 'px';
+	// // el.style.fontSize = parseInt(zoomFactor*60) + 'px';
+}
+
+function switchModeButtonClicked(event) {
+    if (this.dataset.mode == 'filled') {
+        this.dataset.mode = 'empty';
+        this.style.backgroundColor = '#aaa';
+
+        touchOpenMode = false;
+
+    } else {
+        this.dataset.mode = 'filled';
+        this.style.backgroundColor = '#1b96fa';
+
+
+        touchOpenMode = true;
+    }
+}
+
 
 /* -------------------- */
 /* ---- NETWORKING ---- */

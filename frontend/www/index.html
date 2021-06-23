@@ -6,13 +6,13 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <!-- <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover"> -->
-    <meta name="viewport"
-        content="width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <!-- <meta name="viewport" content="initial-scale=0.5, width=device-width"> -->
+    <meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <meta name="color-scheme" content="light dark">
     <title>Picross MP</title>
 
     <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mode-buttons.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/title-screen.css">
     <link rel="stylesheet" href="css/realtime-screen.css">
@@ -79,7 +79,7 @@
                         <span class="game-status-timer">Time: <span id="game-status-timer-value">4:20</span>s</span>
                         <span class="game-status-mistakes">Mistakes: <span id="game-status-mistakes-value">0</span></span>
                     </div> <!-- #game-status-div -->
-                    <table>
+                    <table id="game-main-table">
                         <tbody>
                         </tbody>
                     </table>
@@ -95,17 +95,25 @@
             </div>
         </div>
     </div>
+    
+    <div id="mode-switch-button" data-mode="filled">
+
+    </div>
+    <!-- <div id="mode-button-mark-empty">
+
+    </div> -->
 
     <script src="cordova.js"></script>
+    <script defer src="js/libs/polyfill-flat.js"></script> <!-- from https://github.com/jonathantneal/array-flat-polyfill-->
     <script defer src="js/libs/jquery-3.6.0.min.js"></script>
     <script defer src="js/libs/bootstrap.bundle.min.js"></script>
     <script defer src="js/libs/socket.io.js"></script>
-    <script defer src="js/libs/seedrandom.js"></script>
+    <script defer src="js/libs/seedrandom.js"></script> <!-- from https://github.com/davidbau/seedrandom -->
+    <script defer src="js/mobile-check.js"></script> <!-- from https://stackoverflow.com/a/11381730 -->
     <script defer src="js/seed2field.js"></script>
     <script defer src="js/render-field.js"></script>
     <script defer src="js/game.js"></script>
     <script defer src="js/index.js"></script>
-    <!-- <script type="module" src="js/test-module.js"></script> -->
 </body>
 
 </html>

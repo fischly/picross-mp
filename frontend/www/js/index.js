@@ -14,6 +14,8 @@ var currentGameStartTime = -1;
 var currentGameStopTime = -1;
 var currentGameFinished = false;
 
+var hammertime;
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 document.addEventListener('deviceready', onDeviceReady, false);
 
@@ -50,10 +52,22 @@ function onDeviceReady() {
     $('#room-btn-start').click(onRoomStartButtonClick);
 
     // add listeners to the tbody
-    $('.app table tbody').mousemove(onTableMouseMove);
-    $('.app table tbody').mousedown(onTableMouseDown);
-    $('.app table tbody').mouseup(onTableMouseUp);
+    // TODO: remove for produciton and use cordova.plattformId (!!!)
+    if (cordova.platformId == 'android') {
+        $('.app table tbody')[0].addEventListener('touchstart', onTouchStart);
+        $('.app table tbody')[0].addEventListener('touchend', onTouchEnd);
+        $('.app table tbody')[0].addEventListener('touchmove', onTouchMove);
 
+        // touchmove event handler that repositions the switch-mode buttons (dirty fix since there seems no other way to statically place a button)
+        // window.addEventListener('touchmove', updateModeButtonPosition);
+
+        // click handler for the switch-mode button
+        $('#mode-switch-button').click(switchModeButtonClicked);
+    } else {
+        $('.app table tbody').mousemove(onTableMouseMove);
+        $('.app table tbody').mousedown(onTableMouseDown);
+        $('.app table tbody').mouseup(onTableMouseUp);
+    }
 
     fieldTable = document.querySelector('.app table tbody');
 
@@ -173,20 +187,6 @@ function onRoomStartButtonClick(event) {
 
 
 /* ----------------------------- */
-/* -------- TOUCH INPUT -------- */
-/* ----------------------------- */
-function onTouchStart(event) {
-    console.log('[onTouchStart]', event);
-
-}
-
-function onTouchEnd(event) {
-    console.log('[onTouchEnd]', event);
-}
-
-
-
-/* ----------------------------- */
 /* ----- MESSAGE HANDLING ------ */
 /* ----------------------------- */
 function handleRoomJoinedMessage(message) {
@@ -239,6 +239,12 @@ function handleGameStartedMessage(message) {
             currentActions[y][x] = 0;
         }
     }
+    
+    // if we are on android, display the mark button
+    if (cordova.platformId == 'android') {
+        $('#mode-switch-button').show();
+        updateModeButtonPosition();
+    }
 
     // set the game started time
     currentGameStartTime = Date.now();
@@ -280,4 +286,5 @@ function handlePlayerDoneMessage(message) {
 }
 
 /* for local debugging: TODO REMOVE!!! */
-onDeviceReady();
+// var cordova = { platformId: 'browser' };
+// onDeviceReady();
