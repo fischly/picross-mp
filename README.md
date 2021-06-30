@@ -89,6 +89,11 @@
   See the [open issues](https://github.com/fischly/picross-mp/issues) for a list of proposed features (and known issues) (coming soon). 
   
   ## License
-  Still needs to be decided.
+  See [LICENSE](LICENSE).
   
   ## Acknowledgements
+  - [seedrandom.js](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) from [David Bau](http://davidbau.com/)
+  - [array-flat-polyfill](https://github.com/jonathantneal/array-flat-polyfill) from [jonathantneal](https://github.com/jonathantneal)
+  - [Socket.IO](https://socket.io/)
+  - [jQuery](https://jquery.com/)
+  - [Bootstrap](https://getbootstrap.com/)
