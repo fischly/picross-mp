@@ -10,9 +10,12 @@
   <p align="center">
     Picross MP is a multiplayer version of the lovely game Picross. 
     <br />
-    A (not always up-to date) web-version of the project to test it yourself is available here:
     <br />
-    <a href="http://fischly.freemyip.com:7777">View Demo</a>
+    A web-version of the project to test it for yourself is available here:
+    <br />
+    <a href="https://picross-mp.herokuapp.com">View Demo</a>
+    <br />
+    (<i>the site might take a while to load, since the heroku container must start up</i>)
     <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
@@ -38,7 +41,6 @@
       </ul>
     </li>
     <!--<li><a href="#usage">Usage</a></li>-->
-    <li><a href="#roadmap">Roadmap</a></li>
     <!--<li><a href="#contributing">Contributing</a></li>-->
     <li><a href="#license">License</a></li>
     <!-- <li><a href="#contact">Contact</a></li>-->
@@ -66,10 +68,10 @@
   *(The screenshot on the right is taken by this version as well, all credits go to [Henry Liou](http://liouh.com/home/))*
   
   ### New Features
-  - **Mobile friendly**: This version of the game should be mobile friendly.
-  - **Advanced gestures**: There are a few gestures, that could improve the game a lot. For example, it would be very useful to be able to mark multiple fields in a row by performing a dragging gesture.
-  - **Multiplayer**: The key point. I have a few ideas for different multiplayer game modes:
-      - Both Players play the *same seed* but each on their *own board*. The player's progress gets transmitted to the other. Areas that the other player has already solved correctly are marked by some kind of haze/fog, so one knows how far the other player has advanced without giving away the solution for the puzzle. This creates more suspense. The first one to finish wins the round.
+  - **Mobile friendly**: This version of the game is designed to be mobile friendly.
+  - **Advanced gestures**: There are a few gestures, that improve the game a lot. For example, it is possible to mark/open multiple fields in a row by performing a dragging gesture with a single finger drag gesture. Scrolling/panning and zooming is performed by using two fingers (similarly to a pinch gesture). That way, the nightmare of accidentally opening fields while panning/zooming belongs to the past!
+  - **Multiplayer**: The key point. I have a few ideas for different multiplayer game modes, but only the first one is implemented right now:
+      - Both Players play the *same seed*, but each on their *own board*. The player's progress gets transmitted to the other. Areas that the other player has already solved correctly are marked by a little checkmark in the right corner of the cells. Mistakes are marked with a little red cross. This does not give away the solution (if the cell is filled or empty), it just displays the progress of the other player. This creates a lot more suspense while playing against each other since the progress is transmitted in real-time. The first one to finish wins the round.
       - Both players play on the same field - the first one to open a field correctly gets points (this could be problematic due to ping differences).
       - A player can play a (custom) seed and the time it took to solve gets recorded. He then can challenge others to beat his time by sending an invite, for example. 
   
@@ -78,15 +80,12 @@
   > Socket.IO enables real-time, bidirectional and event-based communication.
   > It works on every platform, browser or device, focusing equally on reliability and speed.
   
-  I then designed a little protocol, that is state-based and request-response focused. Here is an overview of the different message types and their answers in form of a sequence diagram:
+  I then designed a little protocol, that is state-based and (for the most part) request-response focused. Here is an overview of the different message types and their answers in form of a sequence diagram:
   <br>
   <img src="images/picross-mp-sequence.svg" alt="Logo" width="800">
   
   ## Getting Started
   In progress...
-  
-  ## Roadmap
-  See the [open issues](https://github.com/fischly/picross-mp/issues) for a list of proposed features (and known issues) (coming soon). 
   
   ## License
   See [LICENSE](LICENSE).
