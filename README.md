@@ -76,7 +76,27 @@
   <img src="images/picross-mp-sequence.svg" alt="Logo" width="800">
   
   ## Getting Started
-  In progress...
+  You need Apache Cordova. An easy to follow install instruction can be found here: [Official Apache Cordova Install Instructions](https://cordova.apache.org/#getstarted).
+  
+  In order to compile for Android, you need a few more requirements (a list including a more detailed install instruction can be found here: [Official Apache Cordova Android Platform Guide](https://cordova.apache.org/docs/en/10.x/guide/platforms/android/index.html#installing-the-requirements)):
+  - JDK 8
+  - Gradle
+  - Android SDK (installed with Android Studio)
+  - Android SDK Tools (needs to be added in the Android Studio SDK Manager, was installed by default on my Android Studio)
+ 
+  You have to add all these tools to your environment.
+> I have created a batch script that adds all the necessary paths to the PATH variable. That way I could just execute this script in a command line before starting the work on the project without having to add all the paths to the global PATH variable.
+  
+  Now, go into the `frontend` directory and try to run the command `cordova requirements android`. This checks if all needed android requirements are fulfilled. If all requirements are marked as installed, you are ready to compile.
+  
+  To build the project and run it (you have to either manually start the emulator or plug in your android phone in USB/Wifi debugging mode before running this command), execute following command:
+  ```sh
+  cordova run android
+  ```
+  You also can just build the project with the following command:
+  ```sh
+  cordova build android
+  ```
   
   ## License
   See [LICENSE](LICENSE).
