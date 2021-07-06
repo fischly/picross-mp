@@ -1,0 +1,24 @@
+#mode-switch-button {
+    position: absolute;
+
+    background-color: rgba(25, 149, 250, 0.5);
+    
+    width: 7em;
+    height: 7em;
+
+    bottom: 3em;
+    left: 3em;
+
+    display: none;
+}
+
+/* #mode-button-mark-filled {
+    bottom: 0px;
+    left: 0px;
+}
+
+#mode-button-mark-empty {
+    bottom: 0px;
+    left: 0px;
+}
+ */

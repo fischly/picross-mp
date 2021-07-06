@@ -1,0 +1,168 @@
+
+
+body {
+    background-color:rgb(29, 29, 29);
+    font-size:12px;
+    margin:0px;
+    padding:0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    /* padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); */
+    /* height:100vh;
+    width:100%; */
+
+    height: 100%;
+}
+
+.app {
+    /* width: fit-content; */
+    margin: auto;
+
+    /* make non selectable, this allows better gameplay */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#game-table-container {
+    width: max-content;
+    margin: auto;
+}
+
+#game-status-div {
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.cell {
+    position: relative;
+    width: 55px;
+    /* max-width: 55px; */
+    /* min-width: 55px; */
+    height: 55px;
+    /* max-height: 55px; */
+    /* min-height: 55px; */
+
+    border: 1px solid #ccc;
+
+    background-color: #fff;
+}
+.cell.hovered,
+.cell:hover  {
+    background-color: #fb8ad6;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #ff00c8c7 inset;
+}
+
+.cell.opened.marked {
+    background-color: /*#d23dc6*/ #81DAF5;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #01a9db inset;
+}
+.cell.opened.unmarked {
+    background-color: /*#d23dc6*/ #eee;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #ccc inset;
+}
+
+
+.cell.opened.marked.hovered,
+.cell.opened.marked:hover {
+    background-color: /*#d23dc6*/ #81DAF5;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #ff00c8ab inset;
+}
+.cell.opened.unmarked.hovered,
+.cell.opened.unmarked:hover {
+    background-color: /*#d23dc6*/ #eee;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #ff00c8ab inset;
+}
+
+.cell.opened.mistake::after {
+    content: 'x';
+    color: #be0d0d;
+    font-size: 1.7em;
+
+    position: absolute;
+
+    top: 9px;
+    left: 22px;
+}
+
+.cell.mistakeother::before {
+    content: 'x';
+    color: #fa4c4c;
+
+    top: -1px;
+    right: 4px;
+
+    position: absolute;
+}
+.cell.correctother::before {
+    content: '✓';
+    color: #3dcf2d;
+
+    top: -1px;
+    right: 4px;
+
+    position: absolute;
+}
+
+.hint {
+    font-family: monospace;
+    white-space: nowrap;
+    
+    color: white;
+}
+
+.hint.empty {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.hint.top {
+    text-align: center;
+    vertical-align: bottom;
+
+    /* border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc; */
+}
+
+.hint.left {
+    text-align: right;
+
+    /* border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; */
+}
+
+.app tr:nth-child(5n + 1) td {
+    border-bottom: 1px solid rgb(97, 97, 97);
+}
+
+.app td:nth-child(5n + 1) {
+    border-right: 1px solid  rgb(97, 97, 97);
+}
+
+
+#game-status-div {
+    color: white;
+
+    font-family: monospace;
+}
+
+#game-status-div .game-status-mistakes {
+    float: right;
+}
+
+#game-status-mistakes-value {
+    color: darkred;
+}
+
+
+#game-status-alert-own,
+#game-status-alert-other {
+    text-align: center;
+
+    display: none;
+}

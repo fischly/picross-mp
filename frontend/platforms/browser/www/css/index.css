@@ -1,0 +1,72 @@
+
+
+body {
+    background-color:#666;
+    font-size:12px;
+    margin:0px;
+    padding:0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    /* padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); */
+    height:100vh;
+    width:100%;
+}
+
+.app {
+    width: fit-content;
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.cell {
+    width: 55px;
+    height: 55px;
+
+    border: 1px solid #ccc;
+}
+
+.cell.status-unknown {
+    background-color: /*#d23dc6*/ #fff;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #ccc inset;
+}
+
+.cell.status-found {
+    background-color: /*#d23dc6*/ #81DAF5;
+    box-shadow: 0 0 5px 2px /*#74126c*/ #01a9db inset;
+}
+
+.hint {
+    font-family: monospace;
+    
+    color: white;
+}
+
+.hint.empty {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.hint.top {
+    text-align: center;
+
+    /* border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc; */
+}
+
+.hint.left {
+    text-align: right;
+
+    /* border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; */
+}
+
+.app tr:nth-child(5n + 1) td {
+    border-bottom: 1px solid #ccc;
+}
+
+.app td:nth-child(5n + 1) {
+    border-right: 1px solid #ccc;
+}

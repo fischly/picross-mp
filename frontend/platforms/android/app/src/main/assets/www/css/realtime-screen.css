@@ -1,0 +1,25 @@
+.screen-realtime {
+    position: absolute;
+    width: 400px;
+    /* height: 460px; */
+    left: calc(50% - 200px);
+    top: 20px;
+
+    background: repeating-linear-gradient(
+        0deg,
+        #606dbc,
+        #606dbc 8px,
+        #465298 8px,
+        #465298 16px
+        );
+    box-shadow: 0px 0px 12px -2px #000000;
+        
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.screen-realtime form {
+    text-align: left;
+    color: white;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- <meta name="viewport" content="initial-scale=0.5, width=device-width"> -->
+    <meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="color-scheme" content="light dark">
+    <title>Picross MP</title>
+
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mode-buttons.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/title-screen.css">
+    <link rel="stylesheet" href="css/realtime-screen.css">
+</head>
+
+<body>
+    <div class="screen-title">
+        <span class="connection-status m-1 mb-0">Server connection: <span id="connection-status-changeable"
+                class="loading">Loading...</span></span>
+        <img src="img/logo.png" class="mt-2" width="80%" />
+        <form class="">
+            <div class="form-group" style="width: 300px; margin: auto; margin-bottom: 15px;">
+                <select id="room-size-select" class="form-select">
+                    <option value="" selected>Select field size</option>
+                    <option value="5x5">5x5</option>
+                    <option value="5x10">5x10</option>
+                    <option value="10x5">10x5</option>
+                    <option value="10x10">10x10</option>
+                    <option value="15x10">15x10</option>
+                    <option value="15x15">15x15</option>
+                    <option value="20x15">20x15</option>
+                    <option value="20x20">20x20</option>
+                  </select>
+                <button type="button" id="btn-create-room" class="btn btn-light disabled" style="width: 100%;">Create room</button>
+            </div>
+
+            <div class="form-group" style="width: 300px; margin: auto;">
+                <input type="text" class="form-control" style="width: 100%;" id="realtime-roomid" placeholder="Enter room id">
+                <button type="button" id="btn-join-room" class="btn btn-light disabled" style="width: 100%;">Join room</button>
+            </div>
+        </form>
+    </div>
+    <div class="screen-realtime d-none">
+        <form class="m-5">
+            <h4>Realtime mode room</h4>
+            <div class="form-group">
+                <label for="room-username">Your username</label>
+                <input type="text" class="form-control" id="room-username" readonly>
+            </div>
+            <div class="form-group mt-3">
+                <label for="room-roomid">Room id</label>
+                <input type="text" class="form-control" id="room-roomid" readonly>
+            </div>
+            <div class="form-group mt-3">
+                <label for="room-seed">Room seed</label>
+                <input type="text" class="form-control" id="room-seed" readonly>
+            </div>
+            <div class="form-group mt-3">
+                <label for="room-size">Room size</label>
+                <input type="text" class="form-control" id="room-size" readonly>
+            </div>
+            <div class="form-group mt-3">
+                <label for="room-others">Others in this room</label>
+                <textarea class="form-control" id="room-others" readonly></textarea>
+            </div>
+           
+            <button type="button" class="btn btn-light mt-3" id="room-btn-start">Start game</button>
+        </form>
+    </div>
+    <div class="app d-none" oncontextmenu="return false;">
+        <div id="app-container">
+            <div>
+                <div id="game-table-container">
+                    <div id="game-status-div">
+                        <span class="game-status-timer">Time: <span id="game-status-timer-value">4:20</span>s</span>
+                        <span class="game-status-mistakes">Mistakes: <span id="game-status-mistakes-value">0</span></span>
+                    </div> <!-- #game-status-div -->
+                    <table id="game-main-table">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div> <!-- .game-table-container -->
+            </div>
+
+            <div class="alert alert-success" id="game-status-alert-own">
+                <span id="game-status-alert-own-text"></span>
+                <a href="index.html">Restart!</a>
+            </div>
+            <div class="alert alert-success" id="game-status-alert-other" role="alert">
+                Other player finished in 1:40min and with 4 errors.
+            </div>
+        </div>
+    </div>
+    
+    <div id="mode-switch-button" data-mode="filled">
+
+    </div>
+    <!-- <div id="mode-button-mark-empty">
+
+    </div> -->
+
+    <script src="cordova.js"></script>
+    <script defer src="js/libs/polyfill-flat.js"></script> <!-- from https://github.com/jonathantneal/array-flat-polyfill-->
+    <script defer src="js/libs/jquery-3.6.0.min.js"></script>
+    <script defer src="js/libs/bootstrap.bundle.min.js"></script>
+    <script defer src="js/libs/socket.io.js"></script>
+    <script defer src="js/libs/seedrandom.js"></script> <!-- from https://github.com/davidbau/seedrandom -->
+    <script defer src="js/mobile-check.js"></script> <!-- from https://stackoverflow.com/a/11381730 -->
+    <script defer src="js/seed2field.js"></script>
+    <script defer src="js/render-field.js"></script>
+    <script defer src="js/game.js"></script>
+    <script defer src="js/index.js"></script>
+</body>
+
+</html>
