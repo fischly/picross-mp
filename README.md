@@ -12,18 +12,13 @@
     <br />
     <br />
     A web-version of the project to test it for yourself is available here:
-    <br />
     <a href="https://picross-mp.herokuapp.com">View Demo</a>
     <br />
     (<i>the site might take a while to load, since the heroku container must start up</i>)
-    <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>-->
+    The APK can be found under <a href="https://github.com/fischly/picross-mp/releases/tag/v1.0">Releases</a>.
+  
   </p>
 </p>
 
