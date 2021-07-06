@@ -55,17 +55,13 @@
   This way of playing the game is quite cumbersome, so I had the idea to implement a version of the game that supports a few different multiplayer game modes.
   
   ### About Picross
-  <img src="images/picross_screenshot_liouh.com.png" alt="Picross Screenshot by Henry Liou" width="300" align="right" />
+  <img src="images/picross_screenshot.png" alt="Picross Screenshot by Henry Liou" width="400" align="right" />
   
   Picross is a game based on [Nonogram](https://en.wikipedia.org/wiki/Nonogram) puzzles, a form of logic puzzle in picture form.
   
   > Nonograms [...] are picture logic puzzles in which cells in a grid must be colored or left blank according to numbers at the side of the grid to reveal a hidden picture.
   >
   > -- <cite>https://en.wikipedia.org/wiki/Nonogram</cite>
-  
-  A really good Picross implementation for the web can be found at the following website (designed and written by Henry Liou): [Link](http://liouh.com/picross/).
-  
-  *(The screenshot on the right is taken by this version as well, all credits go to [Henry Liou](http://liouh.com/home/))*
   
   ### New Features
   - **Mobile friendly**: This version of the game is designed to be mobile friendly.
